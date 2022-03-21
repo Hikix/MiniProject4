@@ -22,12 +22,20 @@ import javafx.stage.Stage;
 
 
 /**
- * JavaFX App
+ * The way we have structured our code is the following:
+ * 
+ * We used ArrayLists in order to hold content from different tabs, with each
+ * ArrayList entry being a separate tab's entry
+ * 
+ * We used VBoxes that had HBoxes that were stacked on top of each other
+ * inside of them, with each HBox containing some graphical elements such
+ * as the text fields or buttons
  */
 public class App extends Application {
 
     @Override
     public void start(Stage stage) {
+        // Declare and initialise variables to use for graphics
         TabPane tabPane = new TabPane();
         Tab tabSortingIntro = new Tab("Sorting Intro");
         Tab tabBubbleSort = new Tab("Bubble Sort");
@@ -51,12 +59,15 @@ public class App extends Application {
         String defaultTabStr, bStr, sStr, iStr, qStr;
         Random rnd = new Random();
         
+        // Add tabs to the tab ArrayList
         Collections.addAll(tabs, tabSortingIntro, tabBubbleSort, tabSelectionSort, tabInsertionSort, tabQuickSort);
         
+        // Make sure none of the tabs can be closed
         tabs.forEach(tab -> {
             tab.setClosable(false);
         });
         
+        // Text to display on the default tab
         defaultTabStr = "Sorting Algorithms\n"
                 + "\n"
                 + "This program will show some of the most common"
@@ -67,10 +78,14 @@ public class App extends Application {
                 + "\t3 - Insertion Sort\n"
                 + "\t4 - Quick Sort\n";
         
+        // Set default label text to the above string
         defaultLabel.setText(defaultTabStr);
+        // Adds default label to the default HBox
         defaultHBox.getChildren().add(defaultLabel);
+        // Centres the label text
         defaultHBox.setAlignment(Pos.CENTER);
         
+        // Creates V Boxes and adds them to the mainVBoxes ArrayList
         for(int i = 0; i < Constants.NUM_ALGOS; i++){
             VBox vBox = new VBox();
             vBox.setAlignment(Pos.TOP_CENTER);
@@ -78,9 +93,7 @@ public class App extends Application {
             mainVBoxes.add(vBox);
         }
         
-        /**
-         * Sets the description for bubble sort
-         */
+        //Sets the description for bubble sort
         bStr = "\tBubble Sort Description:\n"
                 + "\n"
                 + "Bubble Sort is the simplest sorting algorithm that works by "
@@ -88,9 +101,7 @@ public class App extends Application {
                 + " wrong order.\n"
                 + "\n";
         
-        /**
-         * Sets the description for selection sort
-         */
+        // Sets the description for selection sort
         sStr = "\tSelection Sort Description:\n"
                 + "\n"
                 + "Selection sort sorts an array by repeatedly finding the "
@@ -98,9 +109,7 @@ public class App extends Application {
                 + "the beginning.\n"
                 + "\n";
         
-        /**
-         * Sets the description for insertion sort
-         */
+        // Sets the description for insertion sort
         iStr = "\tInsertion Sort Description:\n"
                 + "Insertion sort is a simple sorting algorithm that works "
                 + "by splitting an array into a \"sorted\" and \"unsorted\" "
@@ -108,30 +117,35 @@ public class App extends Application {
                 + "into the correct position in the sorted part.\n"
                 + "\n";
         
-        /**
-         * Sets the description for quick sort
-         */
+        // Sets the description for quick sort
         qStr = "\tQuick Sort Description:\n"
                 + "Quick sort is also a divide-and-conquer algorithm. It "
                 + "selects an element as a pivot and partitions the array "
                 + "around the pivot.\n"
                 + "\n";
         
+        // Adds the description strings to the descriptionStrings ArrayList
         descriptionStrings.add(bStr);
         descriptionStrings.add(sStr);
         descriptionStrings.add(iStr);
         descriptionStrings.add(qStr);
         
+        // Creates labels for each description and adds them to the 
+        // descriptionLabels ArrayList
         for(int i = 0; i < Constants.NUM_ALGOS; i++){
             descriptionLabels.add(new Label(descriptionStrings.get(i)));
         }
         
+        // Creates the TextFields for each algo and the HBox 
+        // associated with them
         for(int i = 0; i < Constants.NUM_ALGOS; i++){
             HBox hBox = new HBox();
             textFields.add(new TextField[Constants.NUM_TEXT_FIELDS]);
             for(int j = 0; j < Constants.NUM_TEXT_FIELDS; j++){
                 TextField textField = new TextField();
                 textFields.get(i)[j] = textField;
+                // Clips the range of each text field to between 0 and 99
+                // and sets any non-number entry to 0
                 textField.setOnAction(a -> {
                     try {
                         if (Integer.valueOf(textField.getText()) > 99) {
@@ -148,11 +162,16 @@ public class App extends Application {
             textFieldHBoxes.add(hBox);
         }
         
+        // Creates and adds the start algorithm buttons to the startButtons
+        // ArrayList
         startButtons.add(new Button("Start Bubble Sort"));
         startButtons.add(new Button("Start Selection Sort"));
         startButtons.add(new Button("Start Insertion Sort"));
         startButtons.add(new Button("Start Quick Sort"));
         
+        // Sets the start buttons to run their specified algorithm when
+        // they are pressed, or say "Invalid numbers!" when the numbers
+        // are invalid
         startButtons.get(0).setOnAction(a -> {
             try {
                 visualisationLabels.get(0).setText(SortAlgorithms.bubbleSort(fieldsToArray(textFields.get(0))));
@@ -182,8 +201,22 @@ public class App extends Application {
             }
         });
         
+        // Creates and adds the generate random numbers and reset buttons to 
+        // the randonNumsButtons ArrayList
         for (int i = 0; i < Constants.NUM_ALGOS; i++) {
+            // Creates generate random numbers buttons and adds behaviours for
+            // when they're clicked
             randomNumsButtons.add(new Button("Generate Random Numbers"));
+            randomNumsButtons.get(i).setOnAction(a -> {
+                for (int j = 0; j < textFields.size(); j++) {
+                    for (TextField field : textFields.get(j)) {
+                        field.setText("" + rnd.nextInt(100));
+                    }
+                }
+            });
+            
+            // Creates reset buttons and adds behaviours for when they're
+            // clicked
             resetButtons.add(new Button("Reset Numbers"));
             resetButtons.get(i).setOnAction(a -> {
                  for (int j = 0; j < textFields.size(); j++) {
@@ -194,17 +227,12 @@ public class App extends Application {
             });
         }
         
+<<<<<<< Updated upstream
         for (int i = 0; i < Constants.NUM_ALGOS; i++) {
-            randomNumsButtons.get(i).setOnAction(a -> {
-                for (int j = 0; j < textFields.size(); j++) {
-                    for (TextField field : textFields.get(j)) {
-                        field.setText("" + rnd.nextInt(100));                
-                    }
-                }
-            });
-        }
-        
-        for (int i = 0; i < Constants.NUM_ALGOS; i++) {
+=======
+        // Adds buttons to the button HBoxes
+        for (int i = 0; i < Constants.NUM_ALGOS; i++){
+>>>>>>> Stashed changes
             HBox hBox = new HBox();
             hBox.getChildren().addAll(randomNumsButtons.get(i), startButtons.get(i), 
                     resetButtons.get(i));
@@ -212,10 +240,14 @@ public class App extends Application {
             buttonHBoxes.add(hBox);
         }
         
+        // Creates labels and scroll panes for visualisation and adds them to
+        // the visualisationLabels and visualisationScrollPanes ArrayLists
         for (int i = 0; i < Constants.NUM_ALGOS; i++) {
             visualisationLabels.add(new Label(""));
         }
         
+        // Adds the scroll panes to the Hboxes and adds the HBoxes to the
+        // visualisationHBoxes ArrayList
         for (int i = 0; i < Constants.NUM_ALGOS; i++) {
             HBox hBox = new HBox();
             hBox.getChildren().add(visualisationLabels.get(i));
@@ -223,6 +255,8 @@ public class App extends Application {
             visualisationHBoxes.add(hBox);
         }
         
+        // Adds all of the HBoxes to VBoxes and adds those VBoxes to the
+        // mainVBoxes ArrayList
         for (int i = 0; i < Constants.NUM_ALGOS; i++){
             mainVBoxes.get(i).getChildren().addAll(
                     descriptionLabels.get(i),
@@ -232,18 +266,21 @@ public class App extends Application {
             );
         }
         
+        // Sets the content of each of the tabs to the mainVBox
         tabSortingIntro.setContent(defaultHBox);
         tabBubbleSort.setContent(mainVBoxes.get(0));
         tabSelectionSort.setContent(mainVBoxes.get(1));
         tabInsertionSort.setContent(mainVBoxes.get(2));
         tabQuickSort.setContent(mainVBoxes.get(3));
         
+        // Adds all of the tabs to the tab pane
         tabPane.getTabs().add(tabSortingIntro);
         tabPane.getTabs().add(tabBubbleSort);
         tabPane.getTabs().add(tabSelectionSort);
         tabPane.getTabs().add(tabInsertionSort);
         tabPane.getTabs().add(tabQuickSort);
         
+        // Creates and sets the scene to the stage
         Scene scene = new Scene(tabPane, 1200, 800);
         stage.setScene(scene);
         stage.setTitle("Sorting Algorithms");
@@ -254,6 +291,11 @@ public class App extends Application {
         launch();
     }
     
+    /**
+     * Converts array of text fields to array of integers
+     * @param fields array of text fields
+     * @return array of integers
+     */
     private int[] fieldsToArray(TextField[] fields) {
         int[] returnArr = new int[fields.length];
         for (int i = 0; i < fields.length; i++) {
