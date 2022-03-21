@@ -7,7 +7,7 @@ package bank.testfx;
 
 /**
  *
- * @author appuv
+ * @author Austin
  */
 public class SortAlgorithms {
 

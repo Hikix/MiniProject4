@@ -32,6 +32,8 @@ import javafx.stage.Stage;
  * We used VBoxes that had HBoxes that were stacked on top of each other
  * inside of them, with each HBox containing some graphical elements such
  * as the text fields or buttons
+ * 
+ * @author Keval
  */
 public class App extends Application {
 

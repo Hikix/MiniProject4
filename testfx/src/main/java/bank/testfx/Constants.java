@@ -6,7 +6,7 @@ package bank.testfx;
 
 /**
  *
- * @author keval
+ * @author Keval
  */
 public class Constants {
     public static final int NUM_ALGOS = 4;

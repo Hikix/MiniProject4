@@ -16,7 +16,7 @@ import javafx.util.Duration;
 
 /**
  *
- * @author appuv
+ * @author Austin
  */
 public class VisualEffectCircle extends Pane {
     private Circle circEvent;
