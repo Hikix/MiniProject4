@@ -19,7 +19,7 @@ public class SortAlgorithms {
     double total;
     int[] a = new int[N];
 
-    public static void quickSort(int[] a, int first, int last) {
+    public static String quickSort(int[] a, int first, int last) {
         String returnString = "";
         // Only do quicksort for more than three elements
         if ((last - first) > 3) {
@@ -27,20 +27,24 @@ public class SortAlgorithms {
             int mid = first + (last - first) / 2;
             if (a[first] > a[mid]) {
                 swapElements(a, first, mid);
-                returnString += "Swapping numbers " + a[first] + a[mid] + "\n";
+                returnString += "Swapping numbers " + a[first] + " and " + a[mid] + "\n";
+                returnString += "Array now: " + ArrayMethods.printArray(a);
             }
             if (a[mid] > a[last]) {
                 swapElements(a, mid, last);
-                returnString += "Swapping numbers " + a[mid] + a[last] + "\n";
+                returnString += "Swapping numbers " + a[mid] + " and " + a[last] + "\n";
+                returnString += "Array now: " + ArrayMethods.printArray(a);
             }
             if (a[first] > a[mid]) {
                 swapElements(a, first, mid);
-                returnString += "Swapping numbers " + a[first] + a[mid] + "\n";
+                returnString += "Swapping numbers " + a[first] + " and " + a[mid] + "\n";
+                returnString += "Array now: " + ArrayMethods.printArray(a);
             }
             // Move the pivot to the end
             swapElements(a, mid, last - 1);
             int pivotValue = a[last - 1];
-            returnString += "Moving pivot to the end by swapping numbers " + a[mid] + a[last - 1] + "\n";
+            returnString += "Moving pivot to the end by swapping numbers " + a[mid] + " and " + a[last - 1] + "\n";
+            returnString += "Array now: " + ArrayMethods.printArray(a);
             // Now start from both sides and work inward
             int indexFromLeft = first + 1;
             int indexFromRight = last - 2;
@@ -58,7 +62,8 @@ public class SortAlgorithms {
                 // keep doing that until the two counters cross
                 if (indexFromLeft < indexFromRight) {
                     swapElements(a, indexFromLeft, indexFromRight);
-                    returnString += "Swapping the left and right indexes " + a[indexFromLeft] + a[indexFromRight] + "\n";
+                    returnString += "Swapping the left and right indexes " + a[indexFromLeft] + " and " + a[indexFromRight] + "\n";
+                    returnString += "Array now: " + ArrayMethods.printArray(a);
                     indexFromLeft++;
                     indexFromRight--;
                 } else {
@@ -67,18 +72,20 @@ public class SortAlgorithms {
             }
             // Once they cross, we swap the pivot into its location
             swapElements(a, last - 1, indexFromLeft);
-            returnString += "Swapping numbers " + a[last - 1] + a[indexFromLeft] + "\n";
+            returnString += "Swapping numbers " + a[last - 1] + " and " + a[indexFromLeft] + "\n";
+            returnString += "Array now: " + ArrayMethods.printArray(a);
 //            System.out.println(Arrays.toString(a));
             // And then sort each side
-            quickSort(a, first, indexFromLeft - 1);
-            quickSort(a, indexFromLeft + 1, last);
+            returnString += quickSort(a, first, indexFromLeft - 1);
+            returnString += quickSort(a, indexFromLeft + 1, last);
             returnString += "Array after quicksorting both sides: " + ArrayMethods.printArray(a) + "\n";
 
         } else {
             // Just use a simpler sort if the number of elements is small
-            selectionSort(a, first, last + 1);
+            returnString += selectionSort(a, first, last + 1);
         }
-
+        
+        return returnString;
     }
 
     public static void swapElements(int[] a, int i, int j) {
@@ -87,8 +94,10 @@ public class SortAlgorithms {
         a[j] = temp;
     }
 
-    public static void insertionSort(int[] a, int first, int last) {
+    public static String insertionSort(int[] a) {
         String returnString = "";
+        int first = 0;
+        int last = a.length - 1;
         // Start at index 1
         for (int i = first + 1; i < last; i++) {
             // Store the value away
@@ -103,17 +112,49 @@ public class SortAlgorithms {
                 a[iFill + 1] = a[iFill];
                 // And go back one more
                 iFill--;
-                returnString += "Swapping numbers " + a[iFill] + iFill + "\n";
             }
             // Once we find the right place, put our value into place
             a[iFill + 1] = next;
             // we then print the array so it shows the changes on the label
-            returnString += "Array after pass #" + (i + 1) + ": " + ArrayMethods.printArray(a) + "\n";
+            returnString += "Array after pass #" + (i) + ": " + ArrayMethods.printArray(a) + "\n";
 
         }
+        
+        return returnString;
     }
 
-    public static void selectionSort(int[] a, int first, int last) {
+    public static String selectionSort(int[] a) {
+        // Start at the first index
+        String returnString = "";
+        int first = 0;
+        int last = a.length - 1;
+        for (int i = first; i < last; i++) {
+            // Keep track of the smallest element and the value it's at
+            int small = a[i];
+            int iSmall = i;
+            for (int j = i + 1; j < last; j++) {
+                // Loop through to identify the actual smallest element
+                if (a[j] < small) {
+                    small = a[j];
+                    iSmall = j;
+                }
+            }
+            // If the smallest element isn't already in the right place, swap
+            // for the next element
+            if (i != iSmall) {
+
+                swapElements(a, i, iSmall);
+                returnString += "Swapping numbers " + a[i] + " and " + a[iSmall] + "\n";
+                returnString += "Array now: " + ArrayMethods.printArray(a);
+            }
+            // we then print the array so it shows the changes on the label
+            returnString += "Array after pass #" + (i + 1) + ": " + ArrayMethods.printArray(a) + "\n";
+        }
+        
+        return returnString;
+    }
+    
+    public static String selectionSort(int[] a, int first, int last) {
         // Start at the first index
         String returnString = "";
         for (int i = first; i < last; i++) {
@@ -132,30 +173,37 @@ public class SortAlgorithms {
             if (i != iSmall) {
 
                 swapElements(a, i, iSmall);
-                returnString += "Swapping numbers " + small + iSmall + "\n";
+                returnString += "Swapping numbers " + a[i] + " and " + a[iSmall] + "\n";
+                returnString += "Array now: " + ArrayMethods.printArray(a);
                 
             }
             // we then print the array so it shows the changes on the label
             returnString += "Array after pass #" + (i + 1) + ": " + ArrayMethods.printArray(a) + "\n";
         }
+        
+        return returnString;
     }
     
     
-    public static void bubbleSort(int[] a, int length) {
+    public static String bubbleSort(int[] a) {
         // setting up the program to know what is the smallest value
         String returnString = "";
+        int length = a.length;
         for (int i = 0; i < length; i++) {
             for (int j = 1; j < length - i; j++) {
                 int jPlus = a[j - 1];
                 int small = a[j];
                 if (small < jPlus) {
                     swapElements(a, j - 1, j);
-                    returnString += "Swapping numbers " + jPlus + small + "\n";
+                    returnString += "Swapping numbers " + jPlus + " and " + small + "\n";
+                    returnString += "Array now: " + ArrayMethods.printArray(a);
                 }
             }
             // we then print the array so it shows the changes on the label
             returnString += "Array after pass #" + (i + 1) + ": " + ArrayMethods.printArray(a) + "\n";
         }
+        
+        return returnString;
     }
     
 }

@@ -46,6 +46,8 @@ public class App extends Application {
         ArrayList<Button> resetButtons = new ArrayList<>();
         ArrayList<Button> startButtons = new ArrayList<>();
         ArrayList<HBox> buttonHBoxes = new ArrayList<>();
+        ArrayList<Label> visualisationLabels = new ArrayList<>();
+        ArrayList<HBox> visualisationHBoxes = new ArrayList<>();
         String defaultTabStr, bStr, sStr, iStr, qStr;
         Random rnd = new Random();
         
@@ -152,23 +154,43 @@ public class App extends Application {
         startButtons.add(new Button("Start Quick Sort"));
         
         startButtons.get(0).setOnAction(a -> {
-            
+            try {
+                visualisationLabels.get(0).setText(SortAlgorithms.bubbleSort(fieldsToArray(textFields.get(0))));
+            } catch (NumberFormatException e) {
+                visualisationLabels.get(0).setText("Invalid numbers!");
+            }
         });
         startButtons.get(1).setOnAction(a -> {
-            
+            try {
+                visualisationLabels.get(1).setText(SortAlgorithms.selectionSort(fieldsToArray(textFields.get(1))));
+            } catch (NumberFormatException e) {
+                visualisationLabels.get(1).setText("Invalid numbers!");
+            }
         });
         startButtons.get(2).setOnAction(a -> {
-            
+            try {
+                visualisationLabels.get(2).setText(SortAlgorithms.insertionSort(fieldsToArray(textFields.get(2))));
+            } catch (NumberFormatException e) {
+                visualisationLabels.get(2).setText("Invalid numbers!");
+            }
         });
         startButtons.get(3).setOnAction(a -> {
-            
+            try {
+                visualisationLabels.get(3).setText(SortAlgorithms.quickSort(fieldsToArray(textFields.get(3)), 0, Constants.NUM_TEXT_FIELDS - 1));
+            } catch (NumberFormatException e) {
+                visualisationLabels.get(3).setText("Invalid numbers!");
+            }
         });
         
         for (int i = 0; i < Constants.NUM_ALGOS; i++) {
             randomNumsButtons.add(new Button("Generate Random Numbers"));
             resetButtons.add(new Button("Reset Numbers"));
             resetButtons.get(i).setOnAction(a -> {
-                // reset all numbers
+                 for (int j = 0; j < textFields.size(); j++) {
+                    for (TextField field : textFields.get(j)) {
+                        field.setText("");                
+                    }
+                }
             });
         }
         
@@ -190,10 +212,24 @@ public class App extends Application {
             buttonHBoxes.add(hBox);
         }
         
+        for (int i = 0; i < Constants.NUM_ALGOS; i++) {
+            visualisationLabels.add(new Label("asdf"));
+        }
+        
+        for (int i = 0; i < Constants.NUM_ALGOS; i++) {
+            HBox hBox = new HBox();
+            hBox.getChildren().add(visualisationLabels.get(i));
+            hBox.setAlignment(Pos.CENTER);
+            visualisationHBoxes.add(hBox);
+        }
+        
         for (int i = 0; i < Constants.NUM_ALGOS; i++){
-            mainVBoxes.get(i).getChildren().addAll(descriptionLabels.get(i),
+            mainVBoxes.get(i).getChildren().addAll(
+                    descriptionLabels.get(i),
                     textFieldHBoxes.get(i),
-                    buttonHBoxes.get(i));
+                    buttonHBoxes.get(i),
+                    visualisationHBoxes.get(i)
+            );
         }
         
         tabSortingIntro.setContent(defaultHBox);
@@ -217,5 +253,12 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
+    
+    private int[] fieldsToArray(TextField[] fields) {
+        int[] returnArr = new int[fields.length];
+        for (int i = 0; i < fields.length; i++) {
+            returnArr[i] = Integer.valueOf(fields[i].getText());
+        }
+        return returnArr;
+    }
 }
