@@ -227,12 +227,8 @@ public class App extends Application {
             });
         }
         
-<<<<<<< Updated upstream
-        for (int i = 0; i < Constants.NUM_ALGOS; i++) {
-=======
         // Adds buttons to the button HBoxes
         for (int i = 0; i < Constants.NUM_ALGOS; i++){
->>>>>>> Stashed changes
             HBox hBox = new HBox();
             hBox.getChildren().addAll(randomNumsButtons.get(i), startButtons.get(i), 
                     resetButtons.get(i));
