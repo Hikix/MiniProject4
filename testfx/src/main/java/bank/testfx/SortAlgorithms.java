@@ -4,20 +4,12 @@
  */
 package bank.testfx;
 
-import java.text.DecimalFormat;
-import java.util.Random;
 
 /**
  *
  * @author appuv
  */
 public class SortAlgorithms {
-
-    private final static int N = 10;
-    private static Random rand = new Random();
-    long initial;
-    double total;
-    int[] a = new int[N];
 
     public static String quickSort(int[] a, int first, int last) {
         String returnString = "";
@@ -28,23 +20,23 @@ public class SortAlgorithms {
             if (a[first] > a[mid]) {
                 swapElements(a, first, mid);
                 returnString += "Swapping numbers " + a[first] + " and " + a[mid] + "\n";
-                returnString += "Array now: " + ArrayMethods.printArray(a);
+                returnString += "Array now: " + ArrayMethods.printArray(a) + "\n";
             }
             if (a[mid] > a[last]) {
                 swapElements(a, mid, last);
                 returnString += "Swapping numbers " + a[mid] + " and " + a[last] + "\n";
-                returnString += "Array now: " + ArrayMethods.printArray(a);
+                returnString += "Array now: " + ArrayMethods.printArray(a) + "\n";
             }
             if (a[first] > a[mid]) {
                 swapElements(a, first, mid);
                 returnString += "Swapping numbers " + a[first] + " and " + a[mid] + "\n";
-                returnString += "Array now: " + ArrayMethods.printArray(a);
+                returnString += "Array now: " + ArrayMethods.printArray(a) + "\n";
             }
             // Move the pivot to the end
             swapElements(a, mid, last - 1);
             int pivotValue = a[last - 1];
             returnString += "Moving pivot to the end by swapping numbers " + a[mid] + " and " + a[last - 1] + "\n";
-            returnString += "Array now: " + ArrayMethods.printArray(a);
+            returnString += "Array now: " + ArrayMethods.printArray(a) + "\n";
             // Now start from both sides and work inward
             int indexFromLeft = first + 1;
             int indexFromRight = last - 2;
@@ -63,7 +55,7 @@ public class SortAlgorithms {
                 if (indexFromLeft < indexFromRight) {
                     swapElements(a, indexFromLeft, indexFromRight);
                     returnString += "Swapping the left and right indexes " + a[indexFromLeft] + " and " + a[indexFromRight] + "\n";
-                    returnString += "Array now: " + ArrayMethods.printArray(a);
+                    returnString += "Array now: " + ArrayMethods.printArray(a) + "\n";
                     indexFromLeft++;
                     indexFromRight--;
                 } else {
@@ -73,7 +65,7 @@ public class SortAlgorithms {
             // Once they cross, we swap the pivot into its location
             swapElements(a, last - 1, indexFromLeft);
             returnString += "Swapping numbers " + a[last - 1] + " and " + a[indexFromLeft] + "\n";
-            returnString += "Array now: " + ArrayMethods.printArray(a);
+            returnString += "Array now: " + ArrayMethods.printArray(a) + "\n";
 //            System.out.println(Arrays.toString(a));
             // And then sort each side
             returnString += quickSort(a, first, indexFromLeft - 1);
@@ -145,7 +137,7 @@ public class SortAlgorithms {
 
                 swapElements(a, i, iSmall);
                 returnString += "Swapping numbers " + a[i] + " and " + a[iSmall] + "\n";
-                returnString += "Array now: " + ArrayMethods.printArray(a);
+                returnString += "Array now: " + ArrayMethods.printArray(a) + "\n";
             }
             // we then print the array so it shows the changes on the label
             returnString += "Array after pass #" + (i + 1) + ": " + ArrayMethods.printArray(a) + "\n";
@@ -174,7 +166,7 @@ public class SortAlgorithms {
 
                 swapElements(a, i, iSmall);
                 returnString += "Swapping numbers " + a[i] + " and " + a[iSmall] + "\n";
-                returnString += "Array now: " + ArrayMethods.printArray(a);
+                returnString += "Array now: " + ArrayMethods.printArray(a) + "\n";
                 
             }
             // we then print the array so it shows the changes on the label
@@ -196,7 +188,7 @@ public class SortAlgorithms {
                 if (small < jPlus) {
                     swapElements(a, j - 1, j);
                     returnString += "Swapping numbers " + jPlus + " and " + small + "\n";
-                    returnString += "Array now: " + ArrayMethods.printArray(a);
+                    returnString += "Array now: " + ArrayMethods.printArray(a) + "\n";
                 }
             }
             // we then print the array so it shows the changes on the label
