@@ -11,6 +11,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
@@ -47,6 +48,7 @@ public class App extends Application {
         ArrayList<Button> startButtons = new ArrayList<>();
         ArrayList<HBox> buttonHBoxes = new ArrayList<>();
         ArrayList<Label> visualisationLabels = new ArrayList<>();
+        ArrayList<ScrollPane> visualisationScrollPanes = new ArrayList<>();
         ArrayList<HBox> visualisationHBoxes = new ArrayList<>();
         String defaultTabStr, bStr, sStr, iStr, qStr;
         Random rnd = new Random();
@@ -213,13 +215,19 @@ public class App extends Application {
         }
         
         for (int i = 0; i < Constants.NUM_ALGOS; i++) {
-            visualisationLabels.add(new Label(""));
+            Label label = new Label("");
+            ScrollPane sp = new ScrollPane();
+            sp.setPrefSize(1200, 400);
+            sp.setContent(label);
+            
+            visualisationLabels.add(label);
+            visualisationScrollPanes.add(sp);
         }
         
         for (int i = 0; i < Constants.NUM_ALGOS; i++) {
             HBox hBox = new HBox();
-            hBox.getChildren().add(visualisationLabels.get(i));
-            hBox.setAlignment(Pos.CENTER);
+            hBox.getChildren().add(visualisationScrollPanes.get(i));
+            hBox.setAlignment(Pos.BOTTOM_CENTER);
             visualisationHBoxes.add(hBox);
         }
         
