@@ -213,7 +213,7 @@ public class App extends Application {
         }
         
         for (int i = 0; i < Constants.NUM_ALGOS; i++) {
-            visualisationLabels.add(new Label("asdf"));
+            visualisationLabels.add(new Label(""));
         }
         
         for (int i = 0; i < Constants.NUM_ALGOS; i++) {
