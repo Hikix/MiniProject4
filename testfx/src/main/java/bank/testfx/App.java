@@ -204,7 +204,7 @@ public class App extends Application {
             });
         }
         
-        for (int i = 0; i < Constants.NUM_ALGOS; i++){
+        for (int i = 0; i < Constants.NUM_ALGOS; i++) {
             HBox hBox = new HBox();
             hBox.getChildren().addAll(randomNumsButtons.get(i), startButtons.get(i), 
                     resetButtons.get(i));
