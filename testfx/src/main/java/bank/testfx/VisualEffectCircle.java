@@ -26,7 +26,7 @@ public class VisualEffectCircle extends Pane {
     public VisualEffectCircle() {
         //trying to change the opacity, however fell into some errors
         //circEvent.setOpacity(0.2);
-        circEvent = new Circle(80, Color.PINK);
+        circEvent = new Circle(80, Color.GREEN);
         circEvent.relocate(400, 200);
         getChildren().add(circEvent);
         
@@ -34,7 +34,7 @@ public class VisualEffectCircle extends Pane {
         Timeline tlCirc = new Timeline();
         // Set up a KeyFrame that fires an event every 10 milliseconds
         // and invokes its own event listener
-        KeyFrame kfCirc = new KeyFrame(Duration.millis(6), new CircAnimate());
+        KeyFrame kfCirc = new KeyFrame(Duration.millis(10), new CircAnimate());
         tlCirc.getKeyFrames().add(kfCirc);
         tlCirc.setCycleCount(Timeline.INDEFINITE);
         tlCirc.play();
