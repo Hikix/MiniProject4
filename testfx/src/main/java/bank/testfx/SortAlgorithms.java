@@ -97,7 +97,7 @@ public class SortAlgorithms {
     public static String insertionSort(int[] a) {
         String returnString = "";
         int first = 0;
-        int last = a.length - 1;
+        int last = a.length;
         // Start at index 1
         for (int i = first + 1; i < last; i++) {
             // Store the value away
@@ -127,7 +127,7 @@ public class SortAlgorithms {
         // Start at the first index
         String returnString = "";
         int first = 0;
-        int last = a.length - 1;
+        int last = a.length;
         for (int i = first; i < last; i++) {
             // Keep track of the smallest element and the value it's at
             int small = a[i];
