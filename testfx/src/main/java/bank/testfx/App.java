@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -284,8 +285,11 @@ public class App extends Application {
         tabPane.getTabs().add(tabInsertionSort);
         tabPane.getTabs().add(tabQuickSort);
         
-        // Creates and sets the scene to the stage
-        Scene scene = new Scene(tabPane, 1200, 800);
+        // attempting to use vecPane as an background effect
+        VisualEffectCircle vecPane = new VisualEffectCircle();
+        StackPane testPane = new StackPane();
+        Scene scene = new Scene(testPane, 1200, 800);
+        testPane.getChildren().addAll(vecPane, tabPane);
         stage.setScene(scene);
         stage.setTitle("Sorting Algorithms");
         stage.show();
