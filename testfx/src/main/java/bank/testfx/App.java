@@ -3,7 +3,10 @@ package bank.testfx;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -37,12 +40,14 @@ public class App extends Application {
         ArrayList<VBox> mainVBoxes = new ArrayList<>();
         ArrayList<String> descriptionStrings = new ArrayList<>();
         ArrayList<Label> descriptionLabels = new ArrayList<>();
+        final ArrayList<TextField[]> textFields = new ArrayList<>();
         ArrayList<HBox> textFieldHBoxes = new ArrayList<>();
         ArrayList<Button> randomNumsButtons = new ArrayList<>();
         ArrayList<Button> resetButtons = new ArrayList<>();
         ArrayList<Button> startButtons = new ArrayList<>();
         ArrayList<HBox> buttonHBoxes = new ArrayList<>();
-        String defaultTabStr, bStr, sStr, iStr, mStr, qStr;
+        String defaultTabStr, bStr, sStr, iStr, qStr;
+        Random rnd = new Random();
         
         Collections.addAll(tabs, tabSortingIntro, tabBubbleSort, tabSelectionSort, tabInsertionSort, tabQuickSort);
         
@@ -121,8 +126,10 @@ public class App extends Application {
         
         for(int i = 0; i < Constants.NUM_ALGOS; i++){
             HBox hBox = new HBox();
+            textFields.add(new TextField[Constants.NUM_TEXT_FIELDS]);
             for(int j = 0; j < Constants.NUM_TEXT_FIELDS; j++){
                 TextField textField = new TextField();
+                textFields.get(i)[j] = textField;
                 textField.setOnAction(a -> {
                     try {
                         if (Integer.valueOf(textField.getText()) > 99) {
@@ -165,18 +172,15 @@ public class App extends Application {
             });
         }
         
-        randomNumsButtons.get(0).setOnAction(a -> {
-        
-        });
-        randomNumsButtons.get(1).setOnAction(a -> {
-        
-        });
-        randomNumsButtons.get(2).setOnAction(a -> {
-        
-        });
-        randomNumsButtons.get(3).setOnAction(a -> {
-            
-        });
+        for (int i = 0; i < Constants.NUM_ALGOS; i++) {
+            randomNumsButtons.get(i).setOnAction(a -> {
+                for (int j = 0; j < textFields.size(); j++) {
+                    for (TextField field : textFields.get(j)) {
+                        field.setText("" + rnd.nextInt(100));                
+                    }
+                }
+            });
+        }
         
         for (int i = 0; i < Constants.NUM_ALGOS; i++){
             HBox hBox = new HBox();
