@@ -141,12 +141,13 @@ public class SortAlgorithms {
     }
     
     public static void bubbleSort(int[] a, int length) {
-        for (int i = 0; i < length - 1; i++) {
-            for (int j = 0; j < length; j++) {
-                int jPlus = a[j + 1];
+        // setting up the program to know what is the smallest value
+        for (int i = 0; i < length; i++) {
+            for (int j = 1; j < length - i; j++) {
+                int jPlus = a[j - 1];
                 int small = a[j];
-                if (small > jPlus) {
-                    swapElements(a, j, j + 1);
+                if (small < jPlus) {
+                    swapElements(a, j - 1, j);
                 }
             }
         }
