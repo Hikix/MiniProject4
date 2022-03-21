@@ -34,7 +34,7 @@ public class VisualEffectCircle extends Pane {
         Timeline tlCirc = new Timeline();
         // Set up a KeyFrame that fires an event every 10 milliseconds
         // and invokes its own event listener
-        KeyFrame kfCirc = new KeyFrame(Duration.millis(10), new CircAnimate());
+        KeyFrame kfCirc = new KeyFrame(Duration.millis(6), new CircAnimate());
         tlCirc.getKeyFrames().add(kfCirc);
         tlCirc.setCycleCount(Timeline.INDEFINITE);
         tlCirc.play();
