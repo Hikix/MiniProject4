@@ -42,7 +42,7 @@ public class App extends Application {
         ArrayList<Button> resetButtons = new ArrayList<>();
         ArrayList<Button> startButtons = new ArrayList<>();
         ArrayList<HBox> buttonHBoxes = new ArrayList<>();
-        String defaultTabStr, bStr, sStr, iStr, mStr, qStr;
+        String defaultTabStr, bStr, sStr, iStr, qStr;
         
         Collections.addAll(tabs, tabSortingIntro, tabBubbleSort, tabSelectionSort, tabInsertionSort, tabQuickSort);
         
