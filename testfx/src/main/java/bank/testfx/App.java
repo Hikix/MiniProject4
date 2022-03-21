@@ -122,7 +122,19 @@ public class App extends Application {
         for(int i = 0; i < Constants.NUM_ALGOS; i++){
             HBox hBox = new HBox();
             for(int j = 0; j < Constants.NUM_TEXT_FIELDS; j++){
-                hBox.getChildren().add(new TextField());
+                TextField textField = new TextField();
+                textField.setOnAction(a -> {
+                    try {
+                        if (Integer.valueOf(textField.getText()) > 99) {
+                            textField.setText("" + 99);
+                        } else if (Integer.valueOf(textField.getText()) < 0) {
+                            textField.setText("" + 0);
+                        }
+                    } catch (NumberFormatException e) {
+                        textField.setText("" + 0);
+                    }      
+                });
+                hBox.getChildren().add(textField);
             }
             textFieldHBoxes.add(hBox);
         }
