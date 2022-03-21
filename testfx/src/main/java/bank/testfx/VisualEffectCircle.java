@@ -26,7 +26,7 @@ public class VisualEffectCircle extends Pane {
     public VisualEffectCircle() {
         //trying to change the opacity, however fell into some errors
         //circEvent.setOpacity(0.2);
-        circEvent = new Circle(80, Color.GREEN);
+        circEvent = new Circle(80, Color.PINK);
         circEvent.relocate(400, 200);
         getChildren().add(circEvent);
         
