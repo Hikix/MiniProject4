@@ -145,7 +145,28 @@ public class App extends Application {
             
         });
         
-        for(int i = 0; i < Constants.NUM_ALGOS; i++){
+        for (int i = 0; i < Constants.NUM_ALGOS; i++) {
+            randomNumsButtons.add(new Button("Generate Random Numbers"));
+            resetButtons.add(new Button("Reset Numbers"));
+            resetButtons.get(i).setOnAction(a -> {
+                // reset all numbers
+            });
+        }
+        
+        randomNumsButtons.get(0).setOnAction(a -> {
+        
+        });
+        randomNumsButtons.get(1).setOnAction(a -> {
+        
+        });
+        randomNumsButtons.get(2).setOnAction(a -> {
+        
+        });
+        randomNumsButtons.get(3).setOnAction(a -> {
+            
+        });
+        
+        for (int i = 0; i < Constants.NUM_ALGOS; i++){
             HBox hBox = new HBox();
             hBox.getChildren().addAll(randomNumsButtons.get(i), startButtons.get(i), 
                     resetButtons.get(i));
@@ -153,7 +174,7 @@ public class App extends Application {
             buttonHBoxes.add(hBox);
         }
         
-        for(int i = 0; i < Constants.NUM_ALGOS; i++){
+        for (int i = 0; i < Constants.NUM_ALGOS; i++){
             mainVBoxes.get(i).getChildren().addAll(descriptionLabels.get(i),
                     textFieldHBoxes.get(i),
                     buttonHBoxes.get(i));
