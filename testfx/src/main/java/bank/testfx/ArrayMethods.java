@@ -9,7 +9,12 @@ package bank.testfx;
  * @author appuv
  */
 public class ArrayMethods {
-    public static String printArray(int [] input){
+    /**
+     * Converts array to String
+     * @param input array to convert
+     * @return String containing converted array
+     */
+    public static String arrayToString(int [] input){
         String s = "";
         for (int i = 0; i < input.length; i++){
             s += (input[i] + " ");
