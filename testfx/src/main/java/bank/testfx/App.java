@@ -208,7 +208,13 @@ public class App extends Application {
         tabPane.getTabs().add(tabInsertionSort);
         tabPane.getTabs().add(tabQuickSort);
         
+        // attempting to use vecPane as an background effect
+        VisualEffectCircle vecPane = new VisualEffectCircle();
+        
+        //getChildren().add(vecPane);
+        //root.getChildren().addAll(vecPane, tabPane);
         Scene scene = new Scene(tabPane, 1200, 800);
+        
         stage.setScene(scene);
         stage.setTitle("Sorting Algorithms");
         stage.show();
